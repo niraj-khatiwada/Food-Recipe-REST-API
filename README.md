@@ -1,1 +1,1 @@
-# Foof recipe Management using Django REST API
+# Food recipe Management using Django REST API on top of Docker
