@@ -9,3 +9,17 @@ services:
       - ./app:/dockerapp
     command: >
       sh -c "python manage.py runserver [::]:8000"
+    environment:
+      - DB_HOST=database
+      - DB_NAME=postgres_app
+      - DB_USER=niraj
+      - DB_PASS=nepal123
+    depends_on:
+      - database
+
+  database:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=postgres_app
+      - POSTGRES_USER=niraj
+      - POSTGRES_PASSWORD=nepal123
