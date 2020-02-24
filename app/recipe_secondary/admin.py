@@ -4,11 +4,25 @@ from . import models
 # Register your models here.
 
 
-class UserAdmin(BaseUserAdmin):
+class UserAdmin(admin.ModelAdmin):
     ordering = ['id']
-    list_display = ['email', 'username']
-    list_filter = ['email', 'username']
-    search_fields = ['email', 'username']
+    list_display = ['email', 'username',]
+    list_filter = ['email', 'username',]
+    search_fields = ['email', 'username',]
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        ('Personal info', {'fields': ('username',)}),
+        (
+        'Permissions', {'fields': ('is_staff', 'is_admin',)}),
+    )
 
-admin.site.register(UserAdmin, models.Account)
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'password1', 'password2')}
+         ),
+    )
+
+admin.site.register(models.Account, UserAdmin)
+
 # admin.site.register(models.Account)

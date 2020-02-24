@@ -10,7 +10,7 @@ class TestAdmin(TestCase):
             username= 'niraj',
             password= 'nepal123'
         )
-
+        self.client.force_login(self.admin_user)
         self.user = get_user_model().objects.create_user(
             email= 'niraj@gmail.com',
             username= 'niraj',
@@ -18,7 +18,7 @@ class TestAdmin(TestCase):
         )
 
     def test_users_are_listed_in_admin(self):
-        url = reverse('admin: core_user_changelist')
+        url = reverse('admin:core_user_changelist')
         response = self.client.get(url)
 
         self.assertContains(response, self.user.email)
